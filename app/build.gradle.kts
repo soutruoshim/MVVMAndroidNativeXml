@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     id("kotlin-kapt")
     alias(libs.plugins.hilt.android)
+//    alias(libs.plugins.navigation.safe.args)
 }
 
 android {
@@ -21,7 +22,9 @@ android {
     }
     buildFeatures {
         buildConfig = true
+        viewBinding = true
     }
+
     buildTypes {
         release {
             isMinifyEnabled = true
@@ -63,6 +66,10 @@ dependencies {
     //hilt
     implementation (libs.hilt.android)
     kapt(libs.hilt.compiler)
+
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
+
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
