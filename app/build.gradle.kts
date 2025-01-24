@@ -71,6 +71,11 @@ dependencies {
     implementation(libs.androidx.navigation.ui.ktx)
 
 
+    implementation (libs.glide)
+    kapt (libs.compiler)
+
+    implementation (libs.logging.interceptor)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
