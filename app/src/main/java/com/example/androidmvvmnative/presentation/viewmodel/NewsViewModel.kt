@@ -11,12 +11,14 @@ import androidx.lifecycle.viewModelScope
 import com.example.androidmvvmnative.data.model.APIResponse
 import com.example.androidmvvmnative.data.util.Resource
 import com.example.androidmvvmnative.domain.usecase.GetNewsHeadlinesUseCase
+import com.example.androidmvvmnative.domain.usecase.GetSearchedNewsUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class NewsViewModel(
     private val app: Application,
-    private val getNewsHeadlinesUseCase: GetNewsHeadlinesUseCase
+    private val getNewsHeadlinesUseCase: GetNewsHeadlinesUseCase,
+    private val getSearchedNewsUseCase: GetSearchedNewsUseCase
 ) : AndroidViewModel(app){
     val newsHeadLines: MutableLiveData<Resource<APIResponse>> = MutableLiveData()
 
@@ -35,6 +37,31 @@ class NewsViewModel(
             newsHeadLines.postValue(Resource.Error(e.message.toString()))
         }
 
+    }
+
+    //search
+    val searchedNews : MutableLiveData<Resource<APIResponse>> = MutableLiveData()
+
+    fun searchNews(
+        country: String,
+        searchQuery : String,
+        page: Int
+    ) = viewModelScope.launch {
+        searchedNews.postValue(Resource.Loading())
+        try {
+            if (isNetworkAvailable(app)) {
+                val response = getSearchedNewsUseCase.execute(
+                    country,
+                    searchQuery,
+                    page
+                )
+                searchedNews.postValue(response)
+            } else {
+                searchedNews.postValue(Resource.Error("No internet connection"))
+            }
+        }catch(e:Exception){
+            searchedNews.postValue(Resource.Error(e.message.toString()))
+        }
     }
 
     private fun isNetworkAvailable(context: Context?):Boolean{
