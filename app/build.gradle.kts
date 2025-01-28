@@ -76,6 +76,14 @@ dependencies {
 
     implementation (libs.logging.interceptor)
 
+    // room
+    implementation(libs.androidx.room.runtime)
+    kapt (libs.androidx.room.compiler)
+    // optional - Kotlin Extensions and Coroutines support for Room
+    implementation (libs.androidx.room.ktx)
+    // optional - Test helpers
+    testImplementation (libs.androidx.room.testing)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
