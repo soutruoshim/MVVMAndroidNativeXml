@@ -1,6 +1,7 @@
 package com.example.androidmvvmnative.presentation.di
 
 import android.app.Application
+import com.example.androidmvvmnative.domain.usecase.DeleteSavedNewsUseCase
 import com.example.androidmvvmnative.domain.usecase.GetNewsHeadlinesUseCase
 import com.example.androidmvvmnative.domain.usecase.GetSavedNewsUseCase
 import com.example.androidmvvmnative.domain.usecase.GetSearchedNewsUseCase
@@ -22,14 +23,16 @@ class FactoryModule {
         getNewsHeadlinesUseCase: GetNewsHeadlinesUseCase,
         getSearchedNewsUseCase: GetSearchedNewsUseCase,
         saveNewsUseCase: SaveNewsUseCase,
-        getSavedNewsUseCase: GetSavedNewsUseCase
+        getSavedNewsUseCase: GetSavedNewsUseCase,
+        deleteSavedNewsUseCase: DeleteSavedNewsUseCase
     ): NewsViewModelFactory {
         return NewsViewModelFactory(
             application,
             getNewsHeadlinesUseCase,
             getSearchedNewsUseCase,
             saveNewsUseCase,
-            getSavedNewsUseCase
+            getSavedNewsUseCase,
+            deleteSavedNewsUseCase
         )
     }
 }

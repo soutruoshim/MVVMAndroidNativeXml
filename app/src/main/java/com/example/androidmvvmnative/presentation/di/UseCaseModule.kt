@@ -1,6 +1,7 @@
 package com.example.androidmvvmnative.presentation.di
 
 import com.example.androidmvvmnative.domain.repository.NewsRepository
+import com.example.androidmvvmnative.domain.usecase.DeleteSavedNewsUseCase
 import com.example.androidmvvmnative.domain.usecase.GetNewsHeadlinesUseCase
 import com.example.androidmvvmnative.domain.usecase.GetSavedNewsUseCase
 import com.example.androidmvvmnative.domain.usecase.GetSearchedNewsUseCase
@@ -44,5 +45,13 @@ class UseCaseModule {
         newsRepository: NewsRepository
     ): GetSavedNewsUseCase {
         return GetSavedNewsUseCase(newsRepository)
+    }
+
+    @Singleton
+    @Provides
+    fun provideDeleteSavedNewsUseCase(
+        newsRepository: NewsRepository
+    ):DeleteSavedNewsUseCase{
+        return DeleteSavedNewsUseCase(newsRepository)
     }
 }
